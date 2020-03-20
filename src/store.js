@@ -1,13 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import axios from 'axios';
+import axiosMiddleWare from 'redux-axios-middleware'; 
 import rootReducer from './reducers';
 
 const initialState = {};
 
 // array of middleware we're using to make API calls
-const middleware = [thunk];
+const middleware = [axiosMiddleWare(axios)];
 
-// store takes in rootreducer, initial state, and enhancers
+// createStore takes in rootreducer, initial state, and enhancers
 const store = createStore(
     rootReducer, 
     initialState, 

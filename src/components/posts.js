@@ -1,22 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import React, { useEffect }  from 'react';
+//import { connect } from 'react-redux';
+//import { getPosts } from '../actions/postActions';
 
 const Posts = () => {
-    // states 
-    const [posts, setPosts] = useState([]);
-   
-    // where to make API request using axios
-    useEffect(() => {
-        // Axios GET request with async/await
-        async function makeGetRequest() {
-            let res = 
-            await Axios.get('https://jsonplaceholder.typicode.com/posts');
-            let data = res.data; // res.data is payload info returned from server
-            setPosts(data); // change state of posts to info returned from server
-            //console.log(`here are our posts: ${posts}`);
-        }
-        makeGetRequest(); // call function to make request
-    });
+    console.log('in posts');
 
     // iterate through state posts array to return title and body of text 
     // posts comes with userId, id, title, and body
