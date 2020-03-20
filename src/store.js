@@ -1,19 +1,20 @@
-import { createStore, applyMiddleware } from 'redux';
-import axios from 'axios';
-import axiosMiddleWare from 'redux-axios-middleware'; 
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk'; 
 import rootReducer from './reducers';
 
 const initialState = {};
 
 // array of middleware we're using to make API calls
-const middleware = [axiosMiddleWare(axios)];
+const middleware = [thunk];
 
 // createStore takes in rootreducer, initial state, and enhancers
 const store = createStore(
     rootReducer, 
     initialState, 
-    // spread operator drops it into an array
-    applyMiddleware(...middleware)
+    compose(
+        applyMiddleware(...middleware),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
 );
 
 export default store;

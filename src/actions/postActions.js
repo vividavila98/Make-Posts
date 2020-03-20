@@ -1,18 +1,15 @@
-import { GET_POSTS, NEW_POST } from './types';
+import { GET_POSTS } from './types';
+import Axios from 'axios';
 
 // Action creator function 
-export const getPosts = () => {
-    console.log('helloooooo');
-    // returns action object with type and payload
-    // this action will be dispatched to reducer 
-    return {
-        type: GET_POSTS,
-        // payload is data from get request
-        payload: {
-            request: {
-                method: 'get',
-                url: 'https://jsonplaceholder.typicode.com/posts',
-            },
-        },
-    };
+export const getPosts = () => dispatch => {
+    Axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.data)
+    .then(posts => 
+        dispatch({
+            type: GET_POSTS,
+            payload: posts
+        })  
+    )
 };
+

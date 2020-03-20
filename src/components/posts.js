@@ -1,13 +1,16 @@
 import React, { useEffect }  from 'react';
-//import { connect } from 'react-redux';
-//import { getPosts } from '../actions/postActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPosts } from '../actions/postActions';
 
-const Posts = () => {
-    console.log('in posts');
+const Posts = (props) => {
+    useEffect(() => {
+        props.getPosts();
+    });
 
     // iterate through state posts array to return title and body of text 
     // posts comes with userId, id, title, and body
-    const postItems = posts.map(post => (
+    const postItems = props.posts.map(post => (
         <div key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.body}</p>
@@ -22,4 +25,16 @@ const Posts = () => {
     );
 }
 
-export default Posts;
+// type checking props
+Posts.propTypes = {
+    getPosts: PropTypes.func.isRequired,
+    posts: PropTypes.array.isRequired
+}
+
+// in rootreducer, we set our reducer postReducer to posts,
+// so here it's state.posts
+const mapStateToProps = state => ({
+    posts: state.posts.items
+});
+
+export default connect(mapStateToProps, { getPosts })(Posts);
