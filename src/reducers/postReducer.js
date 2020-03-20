@@ -18,6 +18,11 @@ export default function(state = initialState, action) {
                 ...state, // return current state
                 items: action.payload // set items state to action.payload
             }
+        case NEW_POST:
+            return {
+                ...state,
+                item: action.payload
+            }
         default:
             return state;
     }

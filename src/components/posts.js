@@ -5,7 +5,7 @@ import { getPosts } from '../actions/postActions';
 
 const Posts = (props) => {
     useEffect(() => {
-        props.getPosts();
+        props.getPosts(); 
     });
 
     // iterate through state posts array to return title and body of text 
@@ -28,13 +28,15 @@ const Posts = (props) => {
 // type checking props
 Posts.propTypes = {
     getPosts: PropTypes.func.isRequired,
-    posts: PropTypes.array.isRequired
+    posts: PropTypes.array.isRequired,
+    newPost: PropTypes.object.isRequired
 }
 
 // in rootreducer, we set our reducer postReducer to posts,
 // so here it's state.posts
 const mapStateToProps = state => ({
-    posts: state.posts.items
+    posts: state.posts.items,
+    newPost: state.posts.item
 });
 
 export default connect(mapStateToProps, { getPosts })(Posts);
