@@ -8,10 +8,12 @@ const Posts = (props) => {
         props.getPosts(); 
     });
 
+
+
     // iterate through state posts array to return title and body of text 
     // posts comes with userId, id, title, and body
     const postItems = props.posts.map(post => (
-        <div key={post.id}>
+        <div key={post.id} actions={props.getPosts}>
             <h3>{post.title}</h3>
             <p>{post.body}</p>
         </div>
@@ -34,7 +36,7 @@ Posts.propTypes = {
 
 // in rootreducer, we set our reducer postReducer to posts,
 // so here it's state.posts
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({      
     posts: state.posts.items,
     newPost: state.posts.item
 });
